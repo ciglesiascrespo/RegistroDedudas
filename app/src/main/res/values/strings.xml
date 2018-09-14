@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">RegistroDedudas</string>
+    <string name="str_balance">Balance deudas</string>
+    <string name="str_dedudas_pendiente">Deudas pendientes</string>
+    <string name="str_dedudas_pendientes">Deudas pendientes</string>
+    <string name="str_dedudas_saldadas">Deudas saldadas</string>
+    <string name="str_deudas_pendientes">Deudas pendientes</string>
+    <string name="str_deudas_saldadas">Deudas saldadas</string>
+</resources>
