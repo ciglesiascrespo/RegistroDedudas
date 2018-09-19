@@ -5,7 +5,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:src="@drawable/blue_abstract"
+        android:src="@drawable/f"
         android:scaleType="centerCrop"
         />
 
