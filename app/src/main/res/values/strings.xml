@@ -14,4 +14,7 @@
     <string name="str_menu_notificacion">Notificaciones</string>
     <string name="str_menu_salir">Salir</string>
     <string name="str_menu_opciones">Opciones</string>
+    <string name="str_txt_fecha_prueba"><u>2017/08/01</u></string>
+    <string name="str_txt_total">Total:</string>
+    <string name="str_pendientes">Pendientes:</string>
 </resources>

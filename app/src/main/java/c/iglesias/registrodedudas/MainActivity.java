@@ -20,11 +20,7 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
 
-    @BindView(R.id.id_prg_line_pendientes)
-    ProgressLine prgLinePendientes;
 
-    @BindView(R.id.id_prg_line_saldadas)
-    ProgressLine prgLineSaldadas;
 
     @BindView(R.id.id_prg_wheel_pendientes)
     ProgressWheel prgWheelPendientes;
@@ -76,8 +72,7 @@ initValues();
     }
 
     private void initValues(){
-        prgLinePendientes.setmPercentage(60);
-        prgLinePendientes.setmValueText("60");
+
         prgWheelSaldadas.setPercentage(60);
     }
 
