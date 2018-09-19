@@ -2,15 +2,42 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <group>
+        <item
+            android:id="@+id/id_menu_principal"
+            android:icon="@drawable/ic_home"
+            android:title="@string/str_menu_principal" />
+        <item
+            android:id="@+id/id_menu_deudas_pendientes"
+            android:icon="@drawable/ic_debt"
+            android:title="@string/str_menu_pendientes" />
+        <item
+            android:id="@+id/id_menu_deudas_saldadas"
+            android:icon="@drawable/ic_saldadas"
+            android:title="@string/str_menu_saldadas" />
+        <item
+            android:id="@+id/id_menu_ingresos"
+            android:icon="@drawable/ic_ingreso"
+            android:title="@string/str_menu_ingresos" />
+        <item
+            android:id="@+id/id_menu_reporte"
+            android:icon="@drawable/ic_analysis"
+            android:title="@string/str_menu_reportes" />
 
     </group>
 
-    <group android:id="@+id/group_entregaGral">
+    <item android:title="@string/str_menu_opciones">
+        <menu>
+            <item
+                android:id="@+id/id_menu_notificacion"
+                android:icon="@drawable/ic_notification"
+                android:title="@string/str_menu_notificacion"
+                app:actionLayout="@layout/switch_layout" />
 
-    </group>
-    <group android:id="@+id/group_visitaGral">
-
-    </group>
-
+            <item
+                android:id="@+id/id_menu_salir"
+                android:icon="@drawable/ic_exit"
+                android:title="@string/str_menu_salir" />
+        </menu>
+    </item>
 
 </menu>

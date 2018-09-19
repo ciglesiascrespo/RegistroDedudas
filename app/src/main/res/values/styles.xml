@@ -11,5 +11,11 @@
     </style>
 
 
-
+    <style name="ThemeSwitch" parent="Theme.AppCompat.Light">
+        <item name="colorControlActivated">@color/colorPrimary</item>
+        <item name="colorSwitchThumbNormal">@color/colorPrimary
+        </item>
+        <item name="android:colorForeground">@color/colorPrimary
+        </item>
+    </style>
 </resources>

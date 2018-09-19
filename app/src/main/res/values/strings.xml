@@ -1,9 +1,17 @@
 <resources>
-    <string name="app_name">RegistroDedudas</string>
+    <string name="app_name">Registro de Deudas</string>
     <string name="str_balance">Balance deudas</string>
     <string name="str_dedudas_pendiente">Deudas pendientes</string>
     <string name="str_dedudas_pendientes">Deudas pendientes</string>
     <string name="str_dedudas_saldadas">Deudas saldadas</string>
     <string name="str_deudas_pendientes">Deudas pendientes</string>
     <string name="str_deudas_saldadas">Deudas saldadas</string>
+    <string name="str_menu_principal">Principal</string>
+    <string name="str_menu_pendientes">Deudas pendientes</string>
+    <string name="str_menu_saldadas">Deudas saldadas</string>
+    <string name="str_menu_ingresos">Ingresos</string>
+    <string name="str_menu_reportes">Reportes</string>
+    <string name="str_menu_notificacion">Notificaciones</string>
+    <string name="str_menu_salir">Salir</string>
+    <string name="str_menu_opciones">Opciones</string>
 </resources>
