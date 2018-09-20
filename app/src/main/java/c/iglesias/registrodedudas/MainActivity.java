@@ -1,5 +1,6 @@
 package c.iglesias.registrodedudas;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
@@ -15,11 +16,16 @@ import android.widget.TextView;
 import com.app.progresviews.ProgressLine;
 import com.app.progresviews.ProgressWheel;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import c.iglesias.registrodedudas.Config.RegistroDeudasApplication;
+import c.iglesias.registrodedudas.Db.DbHandler;
+import c.iglesias.registrodedudas.Db.Modelo.DeudasDb;
+
 
 public class MainActivity extends AppCompatActivity {
-
 
 
     @BindView(R.id.id_prg_wheel_pendientes)
@@ -40,13 +46,15 @@ public class MainActivity extends AppCompatActivity {
     @Nullable
     NavigationView navigationView;
 
-
+    @Inject
+    DbHandler dbHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        ((RegistroDeudasApplication) getApplication()).getDiComponent().inject(this);
         init();
     }
 
@@ -67,13 +75,21 @@ public class MainActivity extends AppCompatActivity {
             View headerView = navigationView.getHeaderView(0);
             initMenuNavigationView(headerView);
         }
-initValues();
+        initValues();
 
     }
 
-    private void initValues(){
+    private void initValues() {
 
         prgWheelSaldadas.setPercentage(60);
+        ContentValues cv = new ContentValues();
+
+        cv.put(DeudasDb.KEY_FECHA, "2018-01-01");
+        cv.put(DeudasDb.KEY_ESTADO, "Pendiente");
+        cv.put(DeudasDb.KEY_VALOR, 1000);
+        cv.put(DeudasDb.KEY_NOMBRE, "Ciglesias");
+
+        dbHandler.insertDeuda(cv);
     }
 
     /**
