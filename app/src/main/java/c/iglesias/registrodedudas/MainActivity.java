@@ -2,14 +2,20 @@ package c.iglesias.registrodedudas;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.ActionProvider;
+import android.view.ContextMenu;
 import android.view.MenuItem;
+import android.view.SubMenu;
 import android.view.View;
 import android.widget.TextView;
 
@@ -23,16 +29,11 @@ import butterknife.ButterKnife;
 import c.iglesias.registrodedudas.Config.RegistroDeudasApplication;
 import c.iglesias.registrodedudas.Db.DbHandler;
 import c.iglesias.registrodedudas.Db.Modelo.DeudasDb;
+import c.iglesias.registrodedudas.Fragment.DeudasFragment;
+import c.iglesias.registrodedudas.Fragment.MainFragment;
 
 
 public class MainActivity extends AppCompatActivity {
-
-
-    @BindView(R.id.id_prg_wheel_pendientes)
-    ProgressWheel prgWheelPendientes;
-
-    @BindView(R.id.id_prg_wheel_saldadas)
-    ProgressWheel prgWheelSaldadas;
 
     @BindView(R.id.appbar)
     @Nullable
@@ -72,8 +73,8 @@ public class MainActivity extends AppCompatActivity {
     private void init() {
         initToolbar();
         if (navigationView != null) {
-            View headerView = navigationView.getHeaderView(0);
-            initMenuNavigationView(headerView);
+            setupDrawerContent(navigationView);
+            showItem(navigationView.getMenu().getItem(0));
         }
         initValues();
 
@@ -81,7 +82,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void initValues() {
 
-        prgWheelSaldadas.setPercentage(60);
         ContentValues cv = new ContentValues();
 
         cv.put(DeudasDb.KEY_FECHA, "2018-01-01");
@@ -102,11 +102,49 @@ public class MainActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
     }
-
-    /**
-     * Metodo que inicializa las acciones sobre el menu del drawer0
-     */
-    private void initMenuNavigationView(View view) {
-
+    private void setupDrawerContent(NavigationView navigationView) {
+        navigationView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                        showItem(menuItem);
+                        return true;
+                    }
+                });
     }
+
+
+    public void showItem(MenuItem menuItem) {
+        Fragment fragment = null;
+        Class fragmentClass;
+
+        switch(menuItem.getItemId()) {
+            case R.id.id_menu_principal:
+                fragmentClass = MainFragment.class;
+                break;
+            case R.id.id_menu_deudas_pendientes:
+                fragmentClass = DeudasFragment.class;
+                break;
+            default:
+                fragmentClass = MainFragment.class;
+        }
+
+        try {
+            fragment = (Fragment) fragmentClass.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+
+
+        menuItem.setChecked(true);
+
+        setTitle(menuItem.getTitle());
+
+        drawerLayout.closeDrawers();
+    }
+
+
 }

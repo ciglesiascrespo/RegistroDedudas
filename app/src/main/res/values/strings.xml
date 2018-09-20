@@ -17,4 +17,7 @@
     <string name="str_txt_fecha_prueba"><u>2017/08/01</u></string>
     <string name="str_txt_total">Total:</string>
     <string name="str_pendientes">Pendientes:</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -8,6 +8,7 @@ import javax.inject.Inject;
 
 import c.iglesias.registrodedudas.Config.RegistroDeudasApplication;
 import c.iglesias.registrodedudas.Db.Modelo.DeudasDb;
+import c.iglesias.registrodedudas.Db.Response.ResponseBalance;
 
 /**
  * Created by Ciglesias on 18/02/2018.
@@ -38,6 +39,15 @@ public class DbHandler {
     public long insertDeuda(ContentValues cv) {
         return dbHelper.insert(DeudasDb.TABLE, cv);
     }
+
+
+    public ResponseBalance obtenerBalance(String fechaInicio, String fechaFin) {
+        ResponseBalance response = new ResponseBalance();
+
+
+        return response;
+    }
+
    /*
 
 
