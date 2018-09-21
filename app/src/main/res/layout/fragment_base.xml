@@ -2,8 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context="c.iglesias.registrodedudas.Fragment.DeudasFragment">
+    tools:context="c.iglesias.registrodedudas.Fragment.BaseFragment">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -24,5 +23,6 @@
             android:text="@string/str_no_deudas"
             android:textSize="25sp" />
     </FrameLayout>
+
 
 </FrameLayout>
