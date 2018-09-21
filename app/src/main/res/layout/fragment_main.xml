@@ -1,10 +1,10 @@
-<LinearLayout android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:weightSum="100"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:orientation="vertical"
+    android:weightSum="100">
 
     <TextView
         android:layout_width="match_parent"
@@ -51,7 +51,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="10dp"
                         android:layout_toStartOf="@id/id_txt_separador"
-                        android:text="@string/str_txt_fecha_prueba"
                         android:textColor="@color/colorPrimary" />
 
                     <TextView
@@ -68,7 +67,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
-                        android:text="@string/str_txt_fecha_prueba"
                         android:textColor="@color/colorPrimary" />
 
                     <TextView
@@ -88,7 +86,6 @@
                         android:layout_alignParentEnd="true"
                         android:layout_below="@id/id_txt_fecha_inicio_balance"
                         android:layout_marginTop="10dp"
-                        android:text="$ 150000"
                         android:textColor="@color/colorPrimary"
                         android:textSize="16sp" />
 
@@ -96,7 +93,7 @@
                         android:id="@+id/id_txt_label_pendientes"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/id_txt_deuda_total"
+                        android:layout_below="@id/id_txt_deuda_saldadas"
                         android:layout_marginTop="10dp"
                         android:text="@string/str_pendientes"
                         android:textColor="@color/colorPrimary"
@@ -107,9 +104,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
-                        android:layout_below="@id/id_txt_deuda_total"
+                        android:layout_below="@id/id_txt_deuda_saldadas"
                         android:layout_marginTop="10dp"
-                        android:text="$ 15000"
                         android:textColor="@color/colorPrimary"
                         android:textSize="16sp" />
 
@@ -117,9 +113,10 @@
                         android:id="@+id/id_txt_label_saldadas"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/id_txt_deuda_pendiente"
+                        android:layout_below="@id/id_txt_deuda_total"
+
                         android:layout_marginTop="10dp"
-                        android:text="@string/str_txt_total"
+                        android:text="@string/str_txt_saldados"
                         android:textColor="@color/colorPrimary"
                         android:textSize="16sp" />
 
@@ -128,9 +125,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
-                        android:layout_below="@id/id_txt_deuda_pendiente"
+                        android:layout_below="@id/id_txt_deuda_total"
+
                         android:layout_marginTop="10dp"
-                        android:text="$ 85000"
                         android:textColor="@color/colorPrimary"
                         android:textSize="16sp" />
 
@@ -162,21 +159,19 @@
                         android:textSize="21dp" />
 
                     <com.app.progresviews.ProgressWheel
-                        android:id="@+id/id_prg_wheel_saldadas"
+                        android:id="@+id/id_prg_wheel_pendientes"
                         android:layout_width="150dp"
                         android:layout_height="150dp"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="10dp"
                         app:barWidth="17dp"
-                        app:countText="0"
                         app:countTextColor="@android:color/black"
                         app:countTextSize="20sp"
                         app:defTextColor="@android:color/black"
                         app:defTextSize="10sp"
-                        app:definitionText="aslkdjalksd"
+                        app:definitionText="."
                         app:marginBtwText="15dp"
-                        app:percentage="90"
-                        app:progressColor="#64b324" />
+                        app:progressColor="@color/colorAccent" />
 
 
                 </LinearLayout>
@@ -207,21 +202,19 @@
                         android:textSize="21dp" />
 
                     <com.app.progresviews.ProgressWheel
-                        android:id="@+id/id_prg_wheel_pendientes"
+                        android:id="@+id/id_prg_wheel_saldadas"
                         android:layout_width="150dp"
                         android:layout_height="150dp"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="10dp"
                         app:barWidth="17dp"
-                        app:countText="0"
                         app:countTextColor="@android:color/black"
                         app:countTextSize="20sp"
                         app:defTextColor="@android:color/black"
                         app:defTextSize="10sp"
-                        app:definitionText="alsdasdj"
+                        app:definitionText="."
                         app:marginBtwText="15dp"
-                        app:percentage="90"
-                        app:progressColor="@color/colorAccent" />
+                        app:progressColor="#64b324" />
 
 
                 </LinearLayout>

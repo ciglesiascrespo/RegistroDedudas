@@ -31,10 +31,6 @@ public class DbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        Log.e(TAG, "abonos: " + AbonosDb.getCreateTable());
-        Log.e(TAG, "ingresos: " + IngresosDb.getCreateTable());
-        Log.e(TAG, "deudas: " + DeudasDb.getCreateTable());
-
         db.execSQL(DeudasDb.getCreateTable());
         db.execSQL(AbonosDb.getCreateTable());
         db.execSQL(IngresosDb.getCreateTable());
@@ -44,7 +40,7 @@ public class DbHelper extends SQLiteOpenHelper {
     private void insertData(SQLiteDatabase db) {
         ContentValues cv = new ContentValues();
 
-        cv.put(AbonosDb.KEY_FECHA, "2018-01-01");
+        cv.put(AbonosDb.KEY_FECHA, "2018/09/01");
         cv.put(AbonosDb.KEY_ID_DEUDA, 1);
         cv.put(AbonosDb.KEY_VALOR, 50);
 
@@ -52,7 +48,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
         cv = new ContentValues();
 
-        cv.put(AbonosDb.KEY_FECHA, "2018-01-02");
+        cv.put(AbonosDb.KEY_FECHA, "2018/09/02");
         cv.put(AbonosDb.KEY_ID_DEUDA, 1);
         cv.put(AbonosDb.KEY_VALOR, 100);
 
@@ -60,7 +56,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
         cv = new ContentValues();
 
-        cv.put(DeudasDb.KEY_FECHA, "2018-01-01");
+        cv.put(DeudasDb.KEY_FECHA, "2018/09/01");
         cv.put(DeudasDb.KEY_ESTADO, "Pendiente");
         cv.put(DeudasDb.KEY_VALOR, 1000);
         cv.put(DeudasDb.KEY_NOMBRE, "Ciglesias");
@@ -69,7 +65,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
         cv = new ContentValues();
 
-        cv.put(IngresosDb.KEY_FECHA, "2018-01-11");
+        cv.put(IngresosDb.KEY_FECHA, "2018/09/11");
         cv.put(IngresosDb.KEY_VALOR, 120);
         cv.put(IngresosDb.KEY_NOMBRE, "Sueldo");
 

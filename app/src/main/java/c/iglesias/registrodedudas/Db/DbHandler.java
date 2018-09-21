@@ -2,6 +2,7 @@ package c.iglesias.registrodedudas.Db;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.util.Log;
 
 import javax.inject.Inject;
@@ -44,6 +45,68 @@ public class DbHandler {
     public ResponseBalance obtenerBalance(String fechaInicio, String fechaFin) {
         ResponseBalance response = new ResponseBalance();
 
+        Cursor c = null;
+        String sql = "SELECT \n" +
+                "total as total,\n" +
+                "saldados as saldados,\n" +
+                "total - saldados AS pendiente\n" +
+                "FROM (\n" +
+                "SELECT \n" +
+                "\n" +
+                "(SELECT \n" +
+                "SUM(valor)\n" +
+                "FROM deudas d\n" +
+        //        "WHERE d.fecha >= '" + fechaInicio + "' AND d.fecha <=  '" + fechaFin + "') Total,\n" +
+                "WHERE d.fecha between '" + fechaInicio + "' AND  '" + fechaFin + "') Total,\n" +
+                "(\n" +
+                "SELECT \n" +
+                "SUM(a.valor) AS saldados\n" +
+                "FROM deudas d\n" +
+                "LEFT JOIN abonos a\n" +
+                "\t\tON(a.id_Deuda = d.id_Deuda)\n" +
+                "WHERE d.fecha between '" + fechaInicio + "' AND   '" + fechaFin + "'\n" +
+                "\t   AND a.fecha between '" + fechaInicio + "' AND  '" + fechaFin + "') saldados) AS t";
+           //     "WHERE d.fecha >= '" + fechaInicio + "' AND d.fecha <=  '" + fechaFin + "'\n" +
+            //    "\t   AND a.fecha >= '" + fechaInicio + "' AND a.fecha <=  '" + fechaFin + "') saldados) AS t";
+
+       /* String sql = "SELECT \n" +
+                " SUM(valor) total \n" +
+                "  FROM deudas d\n" +
+                "  WHERE d.fecha >= '2017/01/01' AND d.fecha <=  '2018/10/01'";*/
+
+        try {
+            c = dbHelper.execSql(sql);
+            Log.e(TAG, sql);
+            if (c != null && c.moveToFirst()) {
+                do {
+                    int total = -1, saldado = -1, pendiente = -1;
+
+                    if (!c.isNull(c.getColumnIndex("total"))) {
+                        total = c.getInt(c.getColumnIndex("total"));
+                    }
+                    if (!c.isNull(c.getColumnIndex("saldados"))) {
+                        saldado = c.getInt(c.getColumnIndex("saldados"));
+                    }
+
+                    if (!c.isNull(c.getColumnIndex("pendiente"))) {
+                        pendiente = c.getInt(c.getColumnIndex("pendiente"));
+                    }
+
+
+                    response.setPendiente(pendiente);
+                    response.setSaldado(saldado);
+                    response.setTotal(total);
+
+                } while (c.moveToNext());
+            }
+        } catch (Exception e) {
+
+            if (c != null && !c.isClosed()) {
+                c.close();
+            }
+            Log.e(TAG, "Error cargando balance: " + e.getMessage());
+            e.printStackTrace();
+        }
 
         return response;
     }

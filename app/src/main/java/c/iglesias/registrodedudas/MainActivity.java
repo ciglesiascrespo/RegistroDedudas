@@ -82,14 +82,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initValues() {
 
-        ContentValues cv = new ContentValues();
 
-        cv.put(DeudasDb.KEY_FECHA, "2018-01-01");
-        cv.put(DeudasDb.KEY_ESTADO, "Pendiente");
-        cv.put(DeudasDb.KEY_VALOR, 1000);
-        cv.put(DeudasDb.KEY_NOMBRE, "Ciglesias");
-
-        dbHandler.insertDeuda(cv);
     }
 
     /**

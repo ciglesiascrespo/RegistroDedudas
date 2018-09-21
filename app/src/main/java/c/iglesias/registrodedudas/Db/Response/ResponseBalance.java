@@ -5,9 +5,9 @@ package c.iglesias.registrodedudas.Db.Response;
  */
 
 public class ResponseBalance {
-    private int total=0;
-    private int pendiente = 0;
-    private int saldado= 0;
+    private int total=-1;
+    private int pendiente = -1;
+    private int saldado= -1;
 
     public ResponseBalance(){};
 
