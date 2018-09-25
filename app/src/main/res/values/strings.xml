@@ -22,4 +22,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="str_txt_saldados">Saldados:</string>
     <string name="str_no_deudas">No tiene deudas registradas</string>
+    <string name="str_cargando_info">Cargando información...</string>
+    <string name="str_error_cargando_info">Error cargando información</string>
 </resources>

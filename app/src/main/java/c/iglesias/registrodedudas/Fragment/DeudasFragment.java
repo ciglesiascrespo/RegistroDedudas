@@ -2,17 +2,23 @@ package c.iglesias.registrodedudas.Fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.inject.Inject;
 
 import c.iglesias.registrodedudas.Adapter.DeudasPendientesAdapter;
-import c.iglesias.registrodedudas.Db.Response.ResponseDeudas;
+import c.iglesias.registrodedudas.Config.RegistroDeudasApplication;
+import c.iglesias.registrodedudas.Db.DbHandler;
+import c.iglesias.registrodedudas.R;
+import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 public class DeudasFragment extends BaseFragment {
+
+    @Inject
+    DbHandler dbHandler;
 
     public DeudasFragment() {
 
@@ -23,23 +29,30 @@ public class DeudasFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        List<ResponseDeudas> list = new ArrayList<>();
+        RegistroDeudasApplication.getApp().getDiComponent().inject(this);
+        setRvAdapter(new DeudasPendientesAdapter());
+        obtenerDeudas();
 
-        for (int i = 0; i < 5; i++) {
-            ResponseDeudas item = new ResponseDeudas();
 
-            item.setFecha("2018/09/08");
-            item.setNombre("Deuda " + i);
-            item.setTotal(i * 100);
-            item.setPendiente(i * 20);
-            list.add(item);
-        }
+    }
 
-        super.setRvAdapter(new DeudasPendientesAdapter());
-        ((DeudasPendientesAdapter) super.getAdapter()).setListItems(list);
+    private void obtenerDeudas() {
+        showInfo(false);
 
-        super.showList(list.size() > 0);
-
+        Observable.fromCallable(() -> {
+            return dbHandler.obtenerListDeudas();
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe((result) -> {
+                    showInfo(true);
+                    ((DeudasPendientesAdapter) super.getAdapter()).setListItems(result);
+                    showList(result.size() > 0);
+                }, e -> {
+                    Toast.makeText(getContext(), getContext().getResources().getString(R.string.str_error_cargando_info), Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                    showInfo(true);
+                    showList(false);
+                });
     }
 
 }

@@ -10,6 +10,12 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -40,4 +46,7 @@ dependencies {
     implementation 'com.zekapp.library:progreswheelview:1.1.2'
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     implementation 'com.android.support:cardview-v7:26.1.0'
+
+    implementation 'io.reactivex:rxjava:1.1.2'
+    implementation 'io.reactivex:rxandroid:1.1.0'
 }

@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import butterknife.BindView;
@@ -29,6 +31,12 @@ public class BaseFragment extends Fragment {
 
     @BindView(R.id.id_fab_add)
     FloatingActionButton fab;
+
+    @BindView(R.id.id_linear_progress)
+    LinearLayout progress;
+
+    @BindView(R.id.id_fl_info)
+    FrameLayout frameLayoutInfo;
 
 
     RecyclerView.Adapter adapter;
@@ -81,6 +89,11 @@ public class BaseFragment extends Fragment {
     protected void showList(boolean show) {
         rv.setVisibility(show ? View.VISIBLE : View.GONE);
         txtNoElementos.setVisibility(show ? View.GONE : View.VISIBLE);
+    }
+
+    protected void showInfo(boolean show){
+        frameLayoutInfo.setVisibility(show?View.VISIBLE:View.GONE);
+        progress.setVisibility(show?View.GONE:View.VISIBLE);
     }
 
     protected void setRvAdapter(RecyclerView.Adapter adapter) {

@@ -5,11 +5,15 @@ import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 
 import c.iglesias.registrodedudas.Config.RegistroDeudasApplication;
 import c.iglesias.registrodedudas.Db.Modelo.DeudasDb;
 import c.iglesias.registrodedudas.Db.Response.ResponseBalance;
+import c.iglesias.registrodedudas.Db.Response.ResponseDeudas;
 
 /**
  * Created by Ciglesias on 18/02/2018.
@@ -42,6 +46,71 @@ public class DbHandler {
     }
 
 
+    public List<ResponseDeudas> obtenerListDeudas() {
+        List<ResponseDeudas> list = new ArrayList<>();
+
+        Cursor c = null;
+        String sql = "SELECT \n" +
+                "nombre,\n" +
+                "id_deuda,\n" +
+                "valor, \n" +
+                "fecha,\n" +
+                "valor - abonos pendientes\n" +
+                "FROM (\n" +
+                "SELECT\td.Nombre, d.id_deuda,d.Valor,  d.fecha, SUM(a.valor) abonos\n" +
+                "FROM deudas d\n" +
+                "INNER JOIN abonos a \n" +
+                "\t\t\tON(d.id_Deuda = a.id_deuda)\n" +
+                "WHERE d.estado = 'Pendiente'\t\t\t\n" +
+                "GROUP BY d.Nombre,d.id_deuda, d.Valor, d.fecha) AS t";
+        try {
+            c = dbHelper.execSql(sql);
+
+            if (c != null && c.moveToFirst()) {
+                do {
+                    int total = 0, pendiente = 0, idDeuda;
+                    String nombre = "", fecha = "";
+
+                    if (!c.isNull(c.getColumnIndex("nombre"))) {
+                        nombre = c.getString(c.getColumnIndex("nombre"));
+                    }
+                    if (!c.isNull(c.getColumnIndex("id_deuda"))) {
+                        idDeuda = c.getInt(c.getColumnIndex("id_deuda"));
+                    }
+                    if (!c.isNull(c.getColumnIndex("valor"))) {
+                        total = c.getInt(c.getColumnIndex("valor"));
+                    }
+                    if (!c.isNull(c.getColumnIndex("fecha"))) {
+                        fecha = c.getString(c.getColumnIndex("fecha"));
+                    }
+                    if (!c.isNull(c.getColumnIndex("pendientes"))) {
+                        pendiente = c.getInt(c.getColumnIndex("pendientes"));
+                    }
+
+                    ResponseDeudas responseDeudas = new ResponseDeudas();
+
+                    responseDeudas.setPendiente(pendiente);
+                    responseDeudas.setTotal(total);
+                    responseDeudas.setNombre(nombre);
+                    responseDeudas.setFecha(fecha);
+
+                    list.add(responseDeudas);
+
+                } while (c.moveToNext());
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            if (c != null && !c.isClosed()) {
+                c.close();
+            }
+        }
+
+
+        return list;
+    }
+
     public ResponseBalance obtenerBalance(String fechaInicio, String fechaFin) {
         ResponseBalance response = new ResponseBalance();
 
@@ -56,7 +125,7 @@ public class DbHandler {
                 "(SELECT \n" +
                 "SUM(valor)\n" +
                 "FROM deudas d\n" +
-        //        "WHERE d.fecha >= '" + fechaInicio + "' AND d.fecha <=  '" + fechaFin + "') Total,\n" +
+
                 "WHERE d.fecha between '" + fechaInicio + "' AND  '" + fechaFin + "') Total,\n" +
                 "(\n" +
                 "SELECT \n" +
@@ -66,13 +135,7 @@ public class DbHandler {
                 "\t\tON(a.id_Deuda = d.id_Deuda)\n" +
                 "WHERE d.fecha between '" + fechaInicio + "' AND   '" + fechaFin + "'\n" +
                 "\t   AND a.fecha between '" + fechaInicio + "' AND  '" + fechaFin + "') saldados) AS t";
-           //     "WHERE d.fecha >= '" + fechaInicio + "' AND d.fecha <=  '" + fechaFin + "'\n" +
-            //    "\t   AND a.fecha >= '" + fechaInicio + "' AND a.fecha <=  '" + fechaFin + "') saldados) AS t";
 
-       /* String sql = "SELECT \n" +
-                " SUM(valor) total \n" +
-                "  FROM deudas d\n" +
-                "  WHERE d.fecha >= '2017/01/01' AND d.fecha <=  '2018/10/01'";*/
 
         try {
             c = dbHelper.execSql(sql);
