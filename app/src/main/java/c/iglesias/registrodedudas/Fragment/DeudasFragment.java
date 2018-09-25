@@ -1,55 +1,45 @@
 package c.iglesias.registrodedudas.Fragment;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import c.iglesias.registrodedudas.R;
+import java.util.ArrayList;
+import java.util.List;
 
+import c.iglesias.registrodedudas.Adapter.DeudasPendientesAdapter;
+import c.iglesias.registrodedudas.Db.Response.ResponseDeudas;
 
-public class DeudasFragment extends Fragment {
-
+public class DeudasFragment extends BaseFragment {
 
     public DeudasFragment() {
 
-    }
-
-
-    public static DeudasFragment newInstance() {
-        DeudasFragment fragment = new DeudasFragment();
-
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
 
     }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_deudas, container, false);
-    }
-
 
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        List<ResponseDeudas> list = new ArrayList<>();
+
+        for (int i = 0; i < 5; i++) {
+            ResponseDeudas item = new ResponseDeudas();
+
+            item.setFecha("2018/09/08");
+            item.setNombre("Deuda " + i);
+            item.setTotal(i * 100);
+            item.setPendiente(i * 20);
+            list.add(item);
+        }
+
+        super.setRvAdapter(new DeudasPendientesAdapter());
+        ((DeudasPendientesAdapter) super.getAdapter()).setListItems(list);
+
+        super.showList(list.size() > 0);
 
     }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-
-    }
-
 
 }

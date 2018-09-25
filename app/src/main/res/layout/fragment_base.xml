@@ -1,28 +1,55 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="100"
     tools:context="c.iglesias.registrodedudas.Fragment.BaseFragment">
 
-    <FrameLayout
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        android:layout_weight="99">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/id_rv"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="vertical"
-            android:visibility="gone" />
+            android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/id_txt_no_elementos"
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/id_rv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="vertical"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/id_txt_no_elementos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/str_no_deudas"
+                android:textSize="25sp" />
+        </FrameLayout>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/id_fab_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/str_no_deudas"
-            android:textSize="25sp" />
-    </FrameLayout>
+            android:layout_gravity="end|bottom"
+            android:clickable="true"
+            android:foreground="?selectableItemBackground"
+            android:layout_margin="16dp"
+            android:src="@drawable/ic_add"
+            app:fabSize="mini" />
+    </android.support.design.widget.CoordinatorLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom"
+        android:layout_marginHorizontal="26dp"
+        android:background="@color/colorAccent" />
 
 
-</FrameLayout>
+</LinearLayout>
