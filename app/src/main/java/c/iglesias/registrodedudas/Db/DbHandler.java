@@ -51,18 +51,18 @@ public class DbHandler {
 
         Cursor c = null;
         String sql = "SELECT \n" +
-                "nombre,\n" +
+                "nombre_acreedor,\n" +
                 "id_deuda,\n" +
                 "valor, \n" +
                 "fecha,\n" +
                 "valor - abonos pendientes\n" +
                 "FROM (\n" +
-                "SELECT\td.Nombre, d.id_deuda,d.Valor,  d.fecha, SUM(a.valor) abonos\n" +
+                "SELECT\td.nombre_acreedor, d.id_deuda,d.Valor,  d.fecha, SUM(a.valor) abonos\n" +
                 "FROM deudas d\n" +
                 "INNER JOIN abonos a \n" +
                 "\t\t\tON(d.id_Deuda = a.id_deuda)\n" +
                 "WHERE d.estado = 'Pendiente'\t\t\t\n" +
-                "GROUP BY d.Nombre,d.id_deuda, d.Valor, d.fecha) AS t";
+                "GROUP BY d.nombre_acreedor,d.id_deuda, d.Valor, d.fecha) AS t";
         try {
             c = dbHelper.execSql(sql);
 
@@ -71,8 +71,8 @@ public class DbHandler {
                     int total = 0, pendiente = 0, idDeuda;
                     String nombre = "", fecha = "";
 
-                    if (!c.isNull(c.getColumnIndex("nombre"))) {
-                        nombre = c.getString(c.getColumnIndex("nombre"));
+                    if (!c.isNull(c.getColumnIndex("nombre_acreedor"))) {
+                        nombre = c.getString(c.getColumnIndex("nombre_acreedor"));
                     }
                     if (!c.isNull(c.getColumnIndex("id_deuda"))) {
                         idDeuda = c.getInt(c.getColumnIndex("id_deuda"));
