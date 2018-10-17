@@ -1,5 +1,6 @@
 package c.iglesias.registrodedudas.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -7,6 +8,7 @@ import android.widget.Toast;
 
 import javax.inject.Inject;
 
+import c.iglesias.registrodedudas.Activity.AggDeudaActivity;
 import c.iglesias.registrodedudas.Adapter.DeudasPendientesAdapter;
 import c.iglesias.registrodedudas.Config.RegistroDeudasApplication;
 import c.iglesias.registrodedudas.Db.DbHandler;
@@ -30,10 +32,14 @@ public class DeudasFragment extends BaseFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         RegistroDeudasApplication.getApp().getDiComponent().inject(this);
+        setOnclickListenerFab(listener);
         setRvAdapter(new DeudasPendientesAdapter());
+          }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         obtenerDeudas();
-
-
     }
 
     private void obtenerDeudas() {
@@ -54,5 +60,15 @@ public class DeudasFragment extends BaseFragment {
                     showList(false);
                 });
     }
+
+
+    private View.OnClickListener listener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent i = new Intent(getContext(), AggDeudaActivity.class);
+            startActivity(i);
+
+        }
+    };
 
 }

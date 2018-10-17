@@ -101,6 +101,10 @@ public class BaseFragment extends Fragment {
         rv.setAdapter(this.adapter);
     }
 
+    protected void setOnclickListenerFab(View.OnClickListener listener){
+        this.fab.setOnClickListener(listener);
+    }
+
     protected RecyclerView.Adapter getAdapter() {
         return this.adapter;
     }

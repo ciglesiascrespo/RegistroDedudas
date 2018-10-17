@@ -1,8 +1,6 @@
 package c.iglesias.registrodedudas;
 
-import android.content.ContentValues;
-import android.content.Intent;
-import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -10,17 +8,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.ActionProvider;
-import android.view.ContextMenu;
 import android.view.MenuItem;
-import android.view.SubMenu;
-import android.view.View;
-import android.widget.TextView;
-
-import com.app.progresviews.ProgressLine;
-import com.app.progresviews.ProgressWheel;
 
 import javax.inject.Inject;
 
@@ -28,7 +17,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import c.iglesias.registrodedudas.Config.RegistroDeudasApplication;
 import c.iglesias.registrodedudas.Db.DbHandler;
-import c.iglesias.registrodedudas.Db.Modelo.DeudasDb;
 import c.iglesias.registrodedudas.Fragment.DeudasFragment;
 import c.iglesias.registrodedudas.Fragment.MainFragment;
 
@@ -130,9 +118,6 @@ public class MainActivity extends AppCompatActivity {
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
-
-
-        menuItem.setChecked(true);
 
         setTitle(menuItem.getTitle());
 

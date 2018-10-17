@@ -1,5 +1,6 @@
 package c.iglesias.registrodedudas.Config;
 
+import c.iglesias.registrodedudas.Activity.AggDeudaActivity;
 import c.iglesias.registrodedudas.Config.Modulo.ManagerModulo;
 import c.iglesias.registrodedudas.Db.DbHandler;
 import c.iglesias.registrodedudas.Fragment.DeudasFragment;
@@ -14,6 +15,8 @@ import dagger.Component;
 public interface DiComponent {
 
     void inject(MainActivity mainActivity);
+
+    void inject(AggDeudaActivity aggDeudaActivity);
 
     void inject(DbHandler dbHandler);
 

@@ -13,6 +13,9 @@ public class DeudasDb {
     public static final String KEY_FECHA = "fecha";
     public static final String KEY_ESTADO = "estado";
 
+    public static final String ESTADO_PENDIENTE = "Pendiente";
+    public static final String ESTADO_SALDADA = "Saldada";
+
 
     public static String getCreateTable() {
         String query = "CREATE TABLE `" + TABLE + "` ( `" + KEY_ID + "` INTEGER, `" + KEY_NOMBRE + "` TEXT, `" + KEY_VALOR + "` INTEGER " +

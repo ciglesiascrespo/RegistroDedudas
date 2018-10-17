@@ -57,11 +57,11 @@ public class DbHandler {
                 "fecha,\n" +
                 "valor - abonos pendientes\n" +
                 "FROM (\n" +
-                "SELECT\td.nombre_acreedor, d.id_deuda,d.Valor,  d.fecha, SUM(a.valor) abonos\n" +
+                "SELECT\td.nombre_acreedor, d.id_deuda,d.Valor,  d.fecha, SUM(ifnull(a.valor,0)) abonos\n" +
                 "FROM deudas d\n" +
-                "INNER JOIN abonos a \n" +
+                "LEFT JOIN abonos a \n" +
                 "\t\t\tON(d.id_Deuda = a.id_deuda)\n" +
-                "WHERE d.estado = 'Pendiente'\t\t\t\n" +
+                "WHERE d.estado = '" + DeudasDb.ESTADO_PENDIENTE + "'" +
                 "GROUP BY d.nombre_acreedor,d.id_deuda, d.Valor, d.fecha) AS t";
         try {
             c = dbHelper.execSql(sql);
@@ -129,12 +129,12 @@ public class DbHandler {
                 "WHERE d.fecha between '" + fechaInicio + "' AND  '" + fechaFin + "') Total,\n" +
                 "(\n" +
                 "SELECT \n" +
-                "SUM(a.valor) AS saldados\n" +
+                "SUM(ifnull(a.valor,0)) AS saldados\n" +
                 "FROM deudas d\n" +
                 "LEFT JOIN abonos a\n" +
-                "\t\tON(a.id_Deuda = d.id_Deuda)\n" +
+                "\t\tON(a.id_Deuda = d.id_Deuda AND a.fecha between '" + fechaInicio + "' AND  '" + fechaFin + "')\n" +
                 "WHERE d.fecha between '" + fechaInicio + "' AND   '" + fechaFin + "'\n" +
-                "\t   AND a.fecha between '" + fechaInicio + "' AND  '" + fechaFin + "') saldados) AS t";
+                "\t   ) saldados) AS t";
 
 
         try {
@@ -173,5 +173,5 @@ public class DbHandler {
 
         return response;
     }
-    
+
 }

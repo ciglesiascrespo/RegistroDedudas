@@ -24,4 +24,12 @@
     <string name="str_no_deudas">No tiene deudas registradas</string>
     <string name="str_cargando_info">Cargando información...</string>
     <string name="str_error_cargando_info">Error cargando información</string>
+    <string name="str_edt_nombre_deuda">Digite nombre</string>
+    <string name="str_edt_valor_deuda">Digite valor</string>
+    <string name="str_txt_fecha_deuda">Fecha de pago:</string>
+    <string name="str_agregar_deuda">Guardar</string>
+    <string name="str_campo_requerido">Campo requerido.</string>
+    <string name="str_seleccione_una_fecha">Seleccione una fecha</string>
+    <string name="str_deuda_agregada">Deuda agregada con éxito</string>
+    <string name="str_deuda_no_agregada">Error agregando deuda</string>
 </resources>

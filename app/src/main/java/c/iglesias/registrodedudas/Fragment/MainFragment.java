@@ -30,6 +30,8 @@ import c.iglesias.registrodedudas.Db.Response.ResponseBalance;
 import c.iglesias.registrodedudas.R;
 import c.iglesias.registrodedudas.Utils.Util;
 
+import static c.iglesias.registrodedudas.Utils.Util.subrayar;
+
 
 public class MainFragment extends Fragment {
 
@@ -105,11 +107,7 @@ public class MainFragment extends Fragment {
 
     }
 
-    private SpannableString subrayar(String in) {
-        SpannableString mitextoU = new SpannableString(in);
-        mitextoU.setSpan(new UnderlineSpan(), 0, mitextoU.length(), 0);
-        return mitextoU;
-    }
+
 
     private void setValues() {
 

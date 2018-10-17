@@ -18,4 +18,12 @@
         <item name="android:colorForeground">@color/colorPrimary
         </item>
     </style>
+
+    <style name="ThemeButtonLogin" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorAccent">@color/colorPrimary</item>
+        <item name="colorButtonNormal">@color/colorAccent</item>
+        <item name="colorControlNormal">@color/colorPrimary</item>
+        <item name="colorControlActivated">@color/colorPrimaryDark</item>
+        <item name="colorControlHighlight">@color/colorPrimary</item>
+    </style>
 </resources>
